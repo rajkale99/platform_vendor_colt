@@ -143,7 +143,8 @@ PRODUCT_PACKAGES += \
     GalleryGoPrebuilt \
     MarkupGoogle \
     SoundPickerPrebuilt \
-    PixelThemes
+    PixelThemes \
+    OmniStyle
 
 # ThemePicker & Fonts
 PRODUCT_PACKAGES += \
