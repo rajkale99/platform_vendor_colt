@@ -54,4 +54,5 @@ endif
   PRODUCT_PACKAGES += \
      Recorder \
 
-
+# Colt OTA
+include vendor/colt/config/ota.mk

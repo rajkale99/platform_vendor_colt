@@ -1,0 +1,8 @@
+#Common OTA url for all devices
+ota_url=https://raw.githubusercontent.com/colt-enigma/colt_official_devices/c9/colt_ota.xml
+release_type=Stable
+device_name=ro.colt.device
+version_source=ro.colt.version
+version_delimiter=-
+version_position=3
+version_format=yyyyMMdd
