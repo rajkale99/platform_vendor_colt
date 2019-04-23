@@ -54,6 +54,4 @@ endif
   PRODUCT_PACKAGES += \
      Recorder \
 
-# ColtOS OTA
-$(call inherit-product-if-exists, vendor/colt/configs/ota.mk)
 
