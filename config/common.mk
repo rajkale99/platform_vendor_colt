@@ -12,358 +12,51 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
- include vendor/colt/config/version.mk
+# Generic product
+PRODUCT_NAME := colt
+PRODUCT_BRAND := colt
+PRODUCT_DEVICE := generic
 
-PRODUCT_BRAND ?= COLT
+COLT_BUILD_DATE := $(shell date -u +%Y%m%d-%H%M)
 
-# Backup Tool
-PRODUCT_COPY_FILES += \
-    vendor/colt/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
-    vendor/colt/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
-    vendor/colt/prebuilt/common/bin/50-base.sh:system/addon.d/50-base.sh \
-    vendor/colt/prebuilt/common/bin/clean_cache.sh:system/bin/clean_cache.sh
+EXCLUDE_SYSTEMUI_TESTS := true
 
-ifeq ($(AB_OTA_UPDATER),true)
-PRODUCT_COPY_FILES += \
-    vendor/colt/prebuilt/common/bin/backuptool_ab.sh:system/bin/backuptool_ab.sh \
-    vendor/colt/prebuilt/common/bin/backuptool_ab.functions:system/bin/backuptool_ab.functions \
-    vendor/colt/prebuilt/common/bin/backuptool_postinstall.sh:system/bin/backuptool_postinstall.sh
-endif
+PRODUCT_BUILD_PROP_OVERRIDES := BUILD_DISPLAY_ID=$(TARGET_PRODUCT)-$(PLATFORM_VERSION)-$(BUILD_ID)
 
 # Bootanimation
 $(call inherit-product, vendor/colt/config/bootanimation.mk)
 
-DEVICE_PACKAGE_OVERLAYS += \
-    vendor/colt/overlay/common \
-    vendor/colt/overlay/dictionaries
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    keyguard.no_require_sim=true \
+    ro.url.legal=http://www.google.com/intl/%s/mobile/android/basic/phone-legal.html \
+    ro.url.legal.android_privacy=http://www.google.com/intl/%s/mobile/android/basic/privacy.html \
+    ro.com.google.clientidbase=android-google \
+    ro.com.android.wifi-watchlist=GoogleGuest \
+    ro.setupwizard.enterprise_mode=1 \
+    ro.setupwizard.network_required=false \
+    ro.setupwizard.gservices_delay=-1 \
+    ro.com.android.dataroaming=false \
+    drm.service.enabled=true \
+    net.tethering.noprovisioning=true \
+    persist.sys.dun.override=0 \
+    ro.build.selinux=1 \
+    ro.adb.secure=0 \
+    ro.setupwizard.rotation_locked=true \
+    ro.opa.eligible_device=true \
+    persist.sys.disable_rescue=true \
+    ro.config.calibration_cad=/system/etc/calibration_cad.xml
 
-# Do not include art debug targets
-PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    org.colt.fingerprint=$(PLATFORM_VERSION)-$(BUILD_ID)-$(COLT_BUILD_DATE)
 
-# Strip the local variable table and the local variable type table to reduce
-# the size of the system image. This has no bearing on stack traces, but will
-# leave less information available via JDWP.
-PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES := \
+    ro.adb.secure=0 \
+    ro.secure=0 \
+    persist.service.adb.enable=1
 
-
-PRODUCT_PACKAGES += \
-    Terminal \
-    GboardGoPreb \
-    LiveWallpapers \
-    LiveWallpapersPicker \
-    Stk \
-    ViaBrowser \
-    WallpaperPickerGoogle \
-    MarkupGoogle \
-    WellbeingPrebuilt
-
-# Fonts
-PRODUCT_PACKAGES += \
-    Fonts
-
-# CustomDoze
-PRODUCT_PACKAGES += \
-    CustomDoze
-
-# Markup libs
-PRODUCT_COPY_FILES += \
-    vendor/colt/prebuilt/common/lib/libsketchology_native.so:system/lib/libsketchology_native.so \
-    vendor/colt/prebuilt/common/lib64/libsketchology_native.so:system/lib64/libsketchology_native.so
-
-# JamesDSP
-PRODUCT_PACKAGES += \
-   libjamesdsp
-
-# MusicFX
-PRODUCT_PACKAGES += \
-    Eleven \
-    MusicFX
-
-# Lawnchair
-PRODUCT_COPY_FILES += \
-    vendor/colt/prebuilt/common/etc/permissions/privapp-permissions-lawnchair.xml:system/etc/permissions/privapp-permissions-lawnchair.xml \
-    vendor/colt/prebuilt/common/etc/sysconfig/lawnchair-hiddenapi-package-whitelist.xml:system/etc/sysconfig/lawnchair-hiddenapi-package-whitelist.xml
-
-# Colt Packages
-PRODUCT_PACKAGES += \
-    OmniStyle \
-    Lawnchair
-
-# Live Display
-PRODUCT_COPY_FILES += \
-    vendor/colt/config/permissions/privapp-permissions-custom.xml:system/etc/permissions/privapp-permissions-custom.xml
-
-# Weather
- PRODUCT_COPY_FILES +=  \
-     vendor/colt/prebuilt/common/etc/sysconfig/org.pixelexperience.weather.client.xml:system/etc/sysconfig/org.pixelexperience.weather.client.xml \
-     vendor/colt/prebuilt/common/etc/permissions/org.pixelexperience.weather.client.xml:system/etc/default-permissions/org.pixelexperience.weather.client.xml \
-     vendor/colt/prebuilt/common/etc/permissions/privapp-permissions-colt.xml:system/etc/permissions/privapp-permissions-colt.xml
-
- PRODUCT_PROPERTY_OVERRIDES += \
-     org.pixelexperience.weather.revision=2
-
- PRODUCT_PACKAGES += \
-     WeatherClient
-
-# SubstratumSignature Package
-PRODUCT_COPY_FILES += \
-     vendor/colt/prebuilt/common/priv-app/SubstratumSignature.apk:system/priv-app/SubstratumSignature/SubstratumSignature.apk
-
-# QS tile styles
-PRODUCT_PACKAGES += \
-    QStileCircleTrim \
-    QStileDefault \
-    QStileDualToneCircle \
-    QStileSquircleTrim \
-    QStileCookie \
-    QStileAttemptMountain \
-    QStileCircleDual \
-    QStileCircleGradient \
-    QStileDottedCircle \
-    QStileNinja \
-    QStilePokesign \
-    QStileWavey \
-    QStileInk \
-    QStileInkDrop \
-    QStileSquaremedo \
-    QStileOreo \
-    QStileTeardrop \
-    QStileOreoCircleTrim \
-    QStileOreoSquircleTrim \
-    QStilesCircleOutline \
-    QStileHexagon \
-    QStileStar \
-    QStileSquare \
-    QStileGear \
-    QStileBadge \
-    QStileBadgetwo \
-    QStileSquircle \
-    QStileDiamond \
-    QStileNeonlike \
-    QStileOOS \
-    QStileTriangles \
-    QStileDivided \
-    QStileCosmos
-
-# Omni's PoorMan Themes
-PRODUCT_PACKAGES += \
-    DocumentsUITheme \
-    ContactsTheme \
-    MessagesTheme \
-    DialerTheme \
-    TelecommTheme \
-    GboardDarkTheme
-
-# QS header styles
-PRODUCT_PACKAGES += \
-    QSHeaderBlack \
-    QSHeaderGrey \
-    QSHeaderLightGrey \
-    QSHeaderAccent \
-    QSHeaderTransparent
-
-PRODUCT_PACKAGES += \
-    NotificationsBlack \
-    NotificationsDark \
-    NotificationsEnigma \
-    NotificationsColtBlue \
-    NotificationsLight \
-    NotificationsPrimary
-
-PRODUCT_PACKAGES += \
-    AccentSluttyPink \
-    AccentPixel \
-    AccentGoldenShower \
-    AccentDeepOrange \
-    AccentMisticBrown \
-    AccentOmni \
-    AccentWhite \
-    AccentTeal \
-    AccentFromHell \
-    AccentBlueMonday \
-    AccentSmokingGreen \
-    AccentDeadRed \
-    AccentRottenOrange \
-    AccentDeepPurple \
-    AccentCandyRed \
-    AccentJadeGreen \
-    AccentPaleBlue \
-    AccentPaleRed \
-    AccentObfusBleu \
-    AccentNotImpPurple \
-    AccentHolillusion \
-    AccentMoveMint \
-    AccentFootprintPurple \
-    AccentBubblegumPink \
-    AccentFrenchBleu \
-    AccentManiaAmber \
-    AccentSeasideMint \
-    AccentDreamyPurple \
-    AccentSpookedPurple \
-    AccentHeirloomBleu \
-    AccentTruFilPink \
-    AccentWarmthOrange \
-    AccentColdEveningBleu \
-    AccentDiffDayGreen \
-    AccentDuskPurple \
-    AccentBurningRed \
-    AccentHazedPink \
-    AccentColdSummerYellow \
-    AccentNewHouseOrange \
-    AccentIllusionsPurple \
-    AccentFlare \
-    AccentSublime \
-    AccentSincityRed \
-    AccentOrangeCoral \
-    AccentPureLust \
-    AccentQuepal \
-    AccentShadesOfGrey \
-    AccentSweetQPurple \
-    AccentQGreen \
-    AccentElegantGreen \
-    AccentAndroidOneGreen \
-    AccentAospaGreen \
-    AccentCocaColaRed \
-    AccentDiscordPurple \
-    AccentFacebookBlue \
-    AccentInstagramCerise \
-    AccentJollibeeCrimson \
-    AccentMonsterEnergyGreen \
-    AccentNextbitMint \
-    AccentOneplusRed \
-    AccentPepsiBlue \
-    AccentPocophoneYellow \
-    AccentXiaomiOrange \
-    AccentXboxGreen \
-    AccentTwitterBlue \
-    AccentTwitchPurple \
-    AccentStarbucksGreen \
-    AccentSpotifyGreen \
-    AccentSamsungBlue \
-    AccentRazerGreen
-
-PRODUCT_PACKAGES += \
-    PrimaryAlmostBlack \
-    PrimaryBlack \
-    PrimaryEnigma \
-    PrimaryColtBlue \
-    PrimaryColtTrans \
-    PrimaryOmni \
-    PrimaryWhite \
-    PrimaryColdWhite \
-    PrimaryWarmWhite \
-    PrimaryDarkBlue \
-    PrimaryViolator \
-    PrimaryTealMeal \
-    PrimaryRocky \
-    PrimaryColtChocko \
-    PrimaryBlueBlack
-
-# Switch themes
-PRODUCT_PACKAGES += \
-    MD2Switch \
-    OnePlusSwitch \
-    StockSwitch \
-    Contained \
-    Retro \
-    Stockish \
-    Narrow
-
-# Pixel sysconfig
-PRODUCT_COPY_FILES += \
-    vendor/colt/prebuilt/common/etc/sysconfig/pixel.xml:system/etc/sysconfig/pixel.xml
-
-# Turbo
-PRODUCT_PACKAGES += \
-    Turbo \
-    turbo.xml \
-    privapp-permissions-turbo.xml
-
-# Extra tools
-PRODUCT_PACKAGES += \
-    e2fsck \
-    mke2fs \
-    tune2fs \
-    mount.exfat \
-    fsck.exfat \
-    mkfs.exfat \
-    mkfs.f2fs \
-    fsck.f2fs \
-    fibmap.f2fs \
-    mkfs.ntfs \
-    fsck.ntfs \
-    mount.ntfs \
-    7z \
-    bash \
-    bzip2 \
-    curl \
-    lib7z \
-    powertop \
-    pigz \
-    tinymix \
-    unrar \
-    unzip \
-    vim \
-    rsync \
-    zip
-
-# Colt Fonts - Copy to System fonts
-PRODUCT_COPY_FILES += \
-    vendor/colt/prebuilt/fonts/gobold/Gobold.ttf:system/fonts/Gobold.ttf \
-    vendor/colt/prebuilt/fonts/gobold/Gobold-Italic.ttf:system/fonts/Gobold-Italic.ttf \
-    vendor/colt/prebuilt/fonts/gobold/GoboldBold.ttf:system/fonts/GoboldBold.ttf \
-    vendor/colt/prebuilt/fonts/gobold/GoboldBold-Italic.ttf:system/fonts/GoboldBold-Italic.ttf \
-    vendor/colt/prebuilt/fonts/gobold/GoboldThinLight.ttf:system/fonts/GoboldThinLight.ttf \
-    vendor/colt/prebuilt/fonts/gobold/GoboldThinLight-Italic.ttf:system/fonts/GoboldThinLight-Italic.ttf \
-    vendor/colt/prebuilt/fonts/roadrage/road_rage.ttf:system/fonts/RoadRage-Regular.ttf \
-    vendor/colt/prebuilt/fonts/neoneon/neoneon.ttf:system/fonts/Neoneon-Regular.ttf \
-    vendor/colt/prebuilt/fonts/mexcellent/mexcellent.ttf:system/fonts/Mexcellent-Regular.ttf \
-    vendor/colt/prebuilt/fonts/burnstown/burnstown.ttf:system/fonts/Burnstown-Regular.ttf \
-    vendor/colt/prebuilt/fonts/dumbledor/dumbledor.ttf:system/fonts/Dumbledor-Regular.ttf \
-    vendor/colt/prebuilt/fonts/PhantomBold/PhantomBold.ttf:system/fonts/PhantomBold-Regular.ttf \
-    vendor/colt/prebuilt/fonts/snowstorm/snowstorm.ttf:system/fonts/Snowstorm-Regular.ttf \
-    vendor/colt/prebuilt/fonts/vcrosd/vcr_osd_mono.ttf:system/fonts/ThemeableFont-Regular.ttf \
-    vendor/colt/prebuilt/fonts/Shamshung/Shamshung.ttf:system/fonts/Shamshung.ttf
-
-# Exchange Support
-PRODUCT_PACKAGES += \
-    Exchange2
-
-# Backup Services whitelist
-PRODUCT_COPY_FILES += \
-    vendor/colt/config/permissions/backup.xml:system/etc/sysconfig/backup.xml
-
-# init.d support
-PRODUCT_COPY_FILES += \
-    vendor/colt/prebuilt/common/etc/init.d/00banner:system/etc/init.d/00banner
-
-# LatinIME gesture typing
-ifeq ($(TARGET_ARCH),arm64)
-PRODUCT_COPY_FILES += \
-    vendor/colt/prebuilt/common/lib64/libjni_latinime.so:system/lib64/libjni_latinime.so \
-    vendor/colt/prebuilt/common/lib64/libjni_latinimegoogle.so:system/lib64/libjni_latinimegoogle.so
-else
-PRODUCT_COPY_FILES += \
-    vendor/colt/prebuilt/common/lib/libjni_latinime.so:system/lib/libjni_latinime.so \
-    vendor/colt/prebuilt/common/lib/libjni_latinimegoogle.so:system/lib/libjni_latinimegoogle.so
-endif
-
-# Vendor specific init files
-$(foreach f,$(wildcard vendor/colt/prebuilt/common/etc/init/*.rc),\
-    $(eval PRODUCT_COPY_FILES += $(f):system/etc/init/$(notdir $f)))
-
-# init file
-PRODUCT_COPY_FILES += \
-    vendor/colt/prebuilt/common/etc/init.local.rc:root/init.aosp.rc
-
-# Bring in camera effects
-#PRODUCT_COPY_FILES +=  \
- #   vendor/colt/prebuilt/common/media/LMspeed_508.emd:system/media/LMspeed_508.emd \
-  #  vendor/colt/prebuilt/common/media/PFFprec_600.emd:system/media/PFFprec_600.emd
-
-# Copy over added mimetype supported in libcore.net.MimeUtils
-PRODUCT_COPY_FILES += \
-    vendor/colt/prebuilt/common/lib/content-types.properties:system/lib/content-types.properties
+# Common overlay
+PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/colt/overlay/common
+DEVICE_PACKAGE_OVERLAYS += vendor/colt/overlay/common
 
 # Fix Dialer
 PRODUCT_COPY_FILES +=  \
@@ -373,43 +66,45 @@ PRODUCT_COPY_FILES +=  \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
 
-# Enable wireless Xbox 360 controller support
+# Latin IME lib - gesture typing
+ifeq ($(TARGET_ARCH), $(filter $(TARGET_ARCH), arm64))
 PRODUCT_COPY_FILES += \
-    frameworks/base/data/keyboards/Vendor_045e_Product_028e.kl:system/usr/keylayout/Vendor_045e_Product_0719.kl
+    vendor/colt/prebuilt/common/lib64/libjni_latinimegoogle.so:system/lib64/libjni_latinimegoogle.so \
+    vendor/colt/prebuilt/common/lib/libjni_latinimegoogle.so:system/lib/libjni_latinimegoogle.so
+else
+PRODUCT_COPY_FILES += \
+    vendor/colt/prebuilt/common/lib/libjni_latinimegoogle.so:system/lib/libjni_latinimegoogle.so
+endif
 
-# Media
-PRODUCT_GENERIC_PROPERTIES += \
-    media.recorder.show_manufacturer_and_model=true
+# APN
+PRODUCT_COPY_FILES += \
+    vendor/colt/prebuilt/common/etc/apns-conf.xml:system/etc/apns-conf.xml
 
-# Some props that we need for the google stuff we're adding
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.com.google.ime.height_ratio=1.05 \
-    ro.com.google.ime.emoji_key=false
+# AR
+PRODUCT_COPY_FILES += \
+    vendor/colt/prebuilt/common/etc/calibration_cad.xml:system/etc/calibration_cad.xml
 
-# Needed by some RILs and for some gApps packages
+# Extra packages
 PRODUCT_PACKAGES += \
-    librsjni \
-    libprotobuf-cpp-full
+    Launcher3 \
+    messaging \
+    Stk \
+    Terminal
 
-# Charger images
-PRODUCT_PACKAGES += \
-    charger_res_images
+# Init.d script support
+PRODUCT_COPY_FILES += \
+    vendor/colt/prebuilt/common/bin/sysinit:system/bin/sysinit \
+    vendor/colt/prebuilt/common/etc/init/colt-system.rc:system/etc/init/colt-system.rc \
+    vendor/colt/prebuilt/common/etc/init.d/00banner:system/etc/init.d/00banner
 
-# Sounds
-include vendor/colt/config/sounds.mk
+# Backup Tool
+PRODUCT_COPY_FILES += \
+    vendor/colt/prebuilt/common/addon.d/50-colt.sh:system/addon.d/50-colt.sh \
+    vendor/colt/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
+    vendor/colt/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions
 
-# Default ringtone/notification/alarm sounds
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.config.ringtone=Havana_Remix.ogg,galaxy.ogg \
-    ro.config.notification_sound=Ceres.ogg \
-    ro.config.alarm_alert=Helium.ogg
+# Priv-app config
+PRODUCT_COPY_FILES += \
+    vendor/colt/config/permissions/privapp-permissions-colt.xml:system/etc/permissions/privapp-permissions-colt.xml
 
-# Recommend using the non debug dexpreopter
-USE_DEX2OAT_DEBUG ?= false
 
-# Include SDCLANG definitions if it is requested and available
-#ifeq ($(HOST_OS),linux)
-#    ifneq ($(wildcard vendor/qcom/sdclang-4.0/),)
-#        include vendor/aosp/sdclang/sdclang.mk
-#    endif
-#endif
