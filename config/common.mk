@@ -97,6 +97,11 @@ PRODUCT_COPY_FILES += \
     vendor/colt/prebuilt/common/etc/init/colt-system.rc:system/etc/init/colt-system.rc \
     vendor/colt/prebuilt/common/etc/init.d/00banner:system/etc/init.d/00banner
 
+# Markup libs
+PRODUCT_COPY_FILES += \
+    vendor/colt/prebuilt/google/lib/libsketchology_native.so:system/product/lib/libsketchology_native.so \
+    vendor/colt/prebuilt/google/lib64/libsketchology_native.so:system/product/lib64/libsketchology_native.so
+
 # Backup Tool
 PRODUCT_COPY_FILES += \
     vendor/colt/prebuilt/common/addon.d/50-colt.sh:system/addon.d/50-colt.sh \
@@ -116,7 +121,9 @@ PRODUCT_COPY_FILES += \
 # Colt packages
 PRODUCT_PACKAGES += \
     NexusLauncherRelease \
-    GalleryGoPrebuilt
+    GalleryGoPrebuilt \
+    MarkupGoogle \
+    SoundPickerPrebuilt
 
 # Overlays
 PRODUCT_PACKAGES += \
