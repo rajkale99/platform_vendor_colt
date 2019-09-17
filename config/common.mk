@@ -122,5 +122,19 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     NexusLauncherReleaseOverlay
 
+# Accents
+PRODUCT_PACKAGES += \
+    AccentColorYellowOverlay \
+    AccentColorVioletOverlay \
+    AccentColorTealOverlay \
+    AccentColorRedOverlay \
+    AccentColorQGreenOverlay \
+    AccentColorPinkOverlay \
+    AccentColorLightPurpleOverlay \
+    AccentColorIndigoOverlay \
+    AccentColorFlatPinkOverlay \
+    AccentColorCyanOverlay \
+    AccentColorBlueGrayOverlay
+
 # Inclusion of colt specific files
 -include vendor/colt/config/version.mk
