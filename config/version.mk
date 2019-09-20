@@ -12,48 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-COLT_TAG=Enigma
+COLT_TAG=Android10
+COLT_VERSION := V5.0
 
 # COLT RELEASE VERSION
-COLT_VERSION_MAJOR = 4
-COLT_VERSION_MINOR = 6
-COLT_VERSION_MAINTENANCE =
-
-COLT_VERSION_M = v4.6
-
-VERSION := $(COLT_VERSION_MAJOR).$(COLT_VERSION_MINOR)$(COLT_VERSION_MAINTENANCE)
-
-
-ifndef COLT_BUILDTYPE
-    ifdef RELEASE_TYPE
-        # Starting with "COLT_" is optional
-        RELEASE_TYPE := $(shell echo $(RELEASE_TYPE) | sed -e 's|^COLT_||g')
-        COLT_BUILDTYPE := $(RELEASE_TYPE)
-    endif
+ifndef COLT_BUILD_TYPE
+    COLT_BUILD_TYPE := Unofficial
 endif
 
-ifeq ($(COLT_BUILDTYPE), OFFICIAL)
-    COLT_VERSION := ColtOS-$(COLT_TAG)-$(VERSION)_$(COLT_BUILDTYPE)-$(shell date -u +%Y%m%d)
+TARGET_PRODUCT_SHORT := $(subst colt_,,$(COLT_BUILD_TYPE))
 
-else ifeq ($(COLT_BUILDTYPE), EXPERIMENTAL)
-    COLT_VERSION := ColtOS-$(COLT_TAG)-$(VERSION)_$(COLT_BUILDTYPE)-$(shell date -u +%Y%m%d) 
-
-else
-    # If COLT_BUILDTYPE is not defined, set to UNOFFICIAL
-    COLT_BUILDTYPE := UNOFFICIAL
-    COLT_VERSION := ColtOS-$(COLT_TAG)-$(VERSION)_$(COLT_BUILDTYPE)-$(shell date -u +%Y%m%d)
-endif
 
 COLT_DATE := $(shell date -u +%d-%m-%Y)
 
-COLT_DISPLAY_VERSION := ColtOS-$(VERSION)-$(COLT_BUILDTYPE)
-COLT_FINGERPRINT := ColtOS-$(VERSION)-$(COLT_BUILDTYPE)-$(shell date -u +%Y%m%d)
+COLT_FINGERPRINT := ColtOS-10-$(COLT_VERSION)/$(PLATFORM_VERSION)/$(TARGET_PRODUCT_SHORT)/$(shell date -u +%Y%m%d)/$(shell date -u +%H%M)
 
-PRODUCT_GENERIC_PROPERTIES += \
-  ro.colt.extra.version=$(COLT_TAG)-$(VERSION)-$(COLT_BUILDTYPE) \
-  ro.colt.version=$(COLT_VERSION) \
-  ro.colt.display.version=$(COLT_DISPLAY_VERSION) \
-  ro.colt.fingerprint=$(COLT_FINGERPRINT) \
-  ro.colt.build.date=$(COLT_DATE) \
-  ro.colt.releasetype=$(COLT_BUILDTYPE) \
-  ro.colt.base.version=$(COLT_VERSION_M)
+COLT_BUILD_VERSION := ColtOS-10-$(COLT_VERSION)-$(shell date -u +%Y%m%d)-$(COLT_BUILD)-$(COLT_BUILD_TYPE)

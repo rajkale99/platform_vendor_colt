@@ -107,4 +107,5 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/colt/config/permissions/privapp-permissions-colt.xml:system/etc/permissions/privapp-permissions-colt.xml
 
-
+# Inclusion of colt specific files
+-include vendor/colt/config/version.mk
