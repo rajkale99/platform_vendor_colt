@@ -178,3 +178,6 @@ PRODUCT_COPY_FILES += \
 
 # Inclusion of colt specific files
 -include vendor/colt/config/version.mk
+
+# Enable ccache
+USE_CCACHE := true
