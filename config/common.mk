@@ -115,7 +115,8 @@ PRODUCT_COPY_FILES += \
 
 # Colt packages
 PRODUCT_PACKAGES += \
-    NexusLauncherRelease
+    NexusLauncherRelease \
+    GalleryGoPrebuilt
 
 # Overlays
 PRODUCT_PACKAGES += \
