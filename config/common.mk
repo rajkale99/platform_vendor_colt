@@ -136,5 +136,10 @@ PRODUCT_PACKAGES += \
     AccentColorCyanOverlay \
     AccentColorBlueGrayOverlay
 
+#OmniJaws
+PRODUCT_PACKAGES += \
+    OmniJaws \
+    WeatherIcons
+
 # Inclusion of colt specific files
 -include vendor/colt/config/version.mk
