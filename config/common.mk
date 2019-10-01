@@ -58,6 +58,11 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES := \
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/colt/overlay/common
 DEVICE_PACKAGE_OVERLAYS += vendor/colt/overlay/common
 
+# Speed Apps
+PRODUCT_DEXPREOPT_SPEED_APPS += \
+    Settings \
+    SystemUI
+
 # Fix Dialer
 PRODUCT_COPY_FILES +=  \
     vendor/colt/prebuilt/common/etc/sysconfig/dialer_experience.xml:system/etc/sysconfig/dialer_experience.xml
