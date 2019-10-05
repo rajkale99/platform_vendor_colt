@@ -125,6 +125,10 @@ PRODUCT_PACKAGES += \
     MarkupGoogle \
     SoundPickerPrebuilt
 
+# ThemePicker
+PRODUCT_PACKAGES += \
+    ThemePicker
+
 # Overlays
 PRODUCT_PACKAGES += \
     NexusLauncherReleaseOverlay
