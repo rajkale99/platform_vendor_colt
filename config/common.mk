@@ -112,7 +112,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/colt/config/permissions/privapp-permissions-colt.xml:system/etc/permissions/privapp-permissions-colt.xml
 
-
 # Hidden API whitelist
 PRODUCT_COPY_FILES += \
     vendor/colt/config/permissions/colt-hiddenapi-package-whitelist.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/colt-hiddenapi-package-whitelist.xml
@@ -120,7 +119,6 @@ PRODUCT_COPY_FILES += \
 
 # Colt packages
 PRODUCT_PACKAGES += \
-    NexusLauncherRelease \
     GalleryGoPrebuilt \
     MarkupGoogle \
     SoundPickerPrebuilt
@@ -128,10 +126,6 @@ PRODUCT_PACKAGES += \
 # ThemePicker
 PRODUCT_PACKAGES += \
     ThemePicker
-
-# Overlays
-PRODUCT_PACKAGES += \
-    NexusLauncherReleaseOverlay
 
 # Accents
 PRODUCT_PACKAGES += \
