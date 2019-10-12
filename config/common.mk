@@ -122,7 +122,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     GalleryGoPrebuilt \
     MarkupGoogle \
-    SoundPickerPrebuilt
+    SoundPickerPrebuilt \
+    PixelThemes
 
 # ThemePicker
 PRODUCT_PACKAGES += \
