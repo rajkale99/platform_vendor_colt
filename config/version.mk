@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-COLT_TAG=Andy10
-COLT_VERSION := v5.1
+COLT_TAG=Beta
+COLT_VERSION := v5.2
 
 # COLT RELEASE VERSION
 ifndef COLT_BUILD_TYPE
