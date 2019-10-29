@@ -99,6 +99,11 @@ endif
 PRODUCT_COPY_FILES += \
     vendor/colt/prebuilt/common/etc/apns-conf.xml:system/etc/apns-conf.xml
 
+# Fonts
+PRODUCT_COPY_FILES += \
+    $(call find-copy-subdir-files,*,vendor/colt/prebuilt/fonts,$(TARGET_COPY_OUT_PRODUCT)/fonts) \
+	vendor/colt/prebuilt/etc/fonts_customization.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/fonts_customization.xml
+
 # AR
 PRODUCT_COPY_FILES += \
     vendor/colt/prebuilt/common/etc/calibration_cad.xml:system/etc/calibration_cad.xml
@@ -140,9 +145,10 @@ PRODUCT_PACKAGES += \
     SoundPickerPrebuilt \
     PixelThemes
 
-# ThemePicker
+# ThemePicker & Fonts
 PRODUCT_PACKAGES += \
-    ThemePicker
+    ThemePicker \
+    FontGoogleSansOverlay
 
 #OmniJaws
 PRODUCT_PACKAGES += \
