@@ -13,7 +13,7 @@
 # limitations under the License.
 
 COLT_TAG=Beta
-COLT_VERSION := v5.2
+COLT_VERSION := v5.3
 
 # COLT RELEASE VERSION
 ifndef COLT_BUILD_TYPE
