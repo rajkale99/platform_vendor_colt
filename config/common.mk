@@ -54,6 +54,15 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES := \
     ro.secure=0 \
     persist.service.adb.enable=1
 
+# Filesystems tools
+PRODUCT_PACKAGES += \
+    fsck.exfat \
+    fsck.ntfs \
+    mke2fs \
+    mkfs.exfat \
+    mkfs.ntfs \
+    mount.ntfs
+
 # Common overlay
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/colt/overlay/common
 DEVICE_PACKAGE_OVERLAYS += vendor/colt/overlay/common
