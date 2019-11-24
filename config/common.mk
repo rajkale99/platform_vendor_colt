@@ -78,8 +78,8 @@ PRODUCT_DEXPREOPT_SPEED_APPS += \
     SystemUI
 
 # Fix Dialer
-PRODUCT_COPY_FILES +=  \
-    vendor/colt/prebuilt/common/etc/sysconfig/dialer_experience.xml:system/etc/sysconfig/dialer_experience.xml
+# PRODUCT_COPY_FILES +=  \
+#    vendor/colt/prebuilt/common/etc/sysconfig/dialer_experience.xml:system/etc/sysconfig/dialer_experience.xml
 
 # Enable SIP+VoIP on all targets
 PRODUCT_COPY_FILES += \
