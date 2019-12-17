@@ -12,19 +12,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-COLT_TAG=Beta
-COLT_VERSION := v5.3
+# Versioning System
 
-# COLT RELEASE VERSION
 ifndef COLT_BUILD_TYPE
     COLT_BUILD_TYPE := Unofficial
 endif
 
-TARGET_PRODUCT_SHORT := $(subst colt_,,$(COLT_BUILD_TYPE))
+# Only include Colt OTA for official builds
+ifeq ($(filter-out Official,$(COLT_BUILD_TYPE)),)
+    PRODUCT_PACKAGES += \
+        Updater
+endif
 
+TARGET_PRODUCT_SHORT := $(subst colt_,,$(TARGET_PRODUCT))
 
-COLT_DATE := $(shell date -u +%d-%m-%Y)
+# Set all versions
+COLT_VERSION = 5.4
+COLT_BUILD_DATE := $(shell date -u +%d-%m-%Y)
+COLT_BUILD_VERSION := ColtOS-v$(COLT_VERSION)-$(COLT_BUILD_TYPE)-$(shell date -u +%Y%m%d)-$(TARGET_PRODUCT_SHORT)
+COLT_FINGERPRINT := ColtOS/v$(COLT_VERSION)/$(PLATFORM_VERSION)/$(TARGET_PRODUCT_SHORT)/$(shell date -u +%Y%m%d)/$(shell date -u +%H%M)
+COLT_DISPLAY_VERSION := ColtOS-v$(COLT_VERSION)-$(COLT_BUILD_TYPE)
 
-COLT_FINGERPRINT := ColtOS-Andy10-$(COLT_VERSION)/$(PLATFORM_VERSION)/$(TARGET_PRODUCT_SHORT)/$(shell date -u +%Y%m%d)/$(shell date -u +%H%M)
-
-COLT_BUILD_VERSION := ColtOS-$(COLT_TAG)-$(COLT_VERSION)-$(COLT_BUILD_TYPE)-$(shell date -u +%Y%m%d)
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.colt.display.version=$(COLT_DISPLAY_VERSION)
