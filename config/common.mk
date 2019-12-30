@@ -145,7 +145,8 @@ PRODUCT_PACKAGES += \
     MarkupGoogle \
     SoundPickerPrebuilt \
     PixelThemes \
-    OmniStyle
+    OmniStyle \
+    Snap
 
 # ThemePicker & Fonts
 PRODUCT_PACKAGES += \
