@@ -112,6 +112,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     Launcher3 \
     messaging \
+    ExactCalculator \
     Stk \
     Terminal
 
