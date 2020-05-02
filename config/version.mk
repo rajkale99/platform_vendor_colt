@@ -34,4 +34,4 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
         ro.colt.releasetype=$(COLT_BUILD_TYPE) \
         ro.coltversion=$(COLT_VERSION) \
         ro.colt.device=$(CURRENT_DEVICE) \
-        ro.modversion=$(COLT_MOD_VERSION) \
+        ro.modversion=$(COLT_MOD_VERSION)
